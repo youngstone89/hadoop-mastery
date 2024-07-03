@@ -1,0 +1,45 @@
+version: "2"
+services:
+  namenode:
+    image: apache/hadoop:3
+    container_name: namenode
+    hostname: namenode
+    command: [ "hdfs", "namenode" ]
+    ports:
+      - 9870:9870
+    volumes:
+      - ./hadoop-conf:/etc/hadoop
+    environment:
+      - HADOOP_CONF_DIR=/etc/hadoop
+
+  datanode:
+    image: apache/hadoop:3
+    container_name: datanode
+    hostname: datanode
+    command: [ "hdfs", "datanode" ]
+    volumes:
+      - ./hadoop-conf:/etc/hadoop
+    environment:
+      - HADOOP_CONF_DIR=/etc/hadoop
+
+  resourcemanager:
+    image: apache/hadoop:3
+    container_name: resourcemanager
+    hostname: resourcemanager
+    command: [ "yarn", "resourcemanager" ]
+    ports:
+      - 8088:8088
+    volumes:
+      - ./hadoop-conf:/etc/hadoop
+    environment:
+      - HADOOP_CONF_DIR=/etc/hadoop
+
+  nodemanager:
+    image: apache/hadoop:3
+    container_name: nodemanager
+    hostname: nodemanager
+    command: [ "yarn", "nodemanager" ]
+    volumes:
+      - ./hadoop-conf:/etc/hadoop
+    environment:
+      - HADOOP_CONF_DIR=/etc/hadoop

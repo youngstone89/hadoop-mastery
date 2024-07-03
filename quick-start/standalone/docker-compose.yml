@@ -1,0 +1,12 @@
+version: "2"
+services:
+  hadoop:
+    image: apache/hadoop:3
+    container_name: hadoop-standalone
+    command: tail -f /dev/null
+    volumes:
+      - ./hadoop-conf:/etc/hadoop
+    environment:
+      - HADOOP_CONF_DIR=/etc/hadoop
+    working_dir: /usr/local/hadoop
+    tty: true
